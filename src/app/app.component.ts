@@ -12,7 +12,7 @@ export class AppComponent implements OnInit  {
   recognition:any;
 
   constructor(private el:ElementRef) {
-    this.notes = JSON.parse(<any>localStorage.getItem('notes')) || [{ id: 0,content:'' }];
+    this.notes = JSON.parse(<any>sessionStorage.getItem('notes')) || [{ id: 0,content:'' }];
   }
 
   updateAllNotes() {
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit  {
     notes.forEach((note: any, index: number)=>{
          this.notes[note.id].content = note.querySelector('.content')?.innerHTML;
     });
-    localStorage.setItem('notes', JSON.stringify(this.notes));
+    sessionStorage.setItem('notes', JSON.stringify(this.notes));
   }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit  {
       this.notes.push({ id: this.notes.length + 1, content:'' });
     // sort the array
     this.notes= this.notes.sort((a: any,b: any)=>{ return a.id - b.id });
-    localStorage.setItem('notes', JSON.stringify(this.notes));
+    sessionStorage.setItem('notes', JSON.stringify(this.notes));
     }
     
   };
@@ -50,15 +50,15 @@ export class AppComponent implements OnInit  {
     }
     this.updateNote(json);
     if(this.notes.length === 0){
-      localStorage.removeItem('notes');
+      sessionStorage.removeItem('notes');
     }else{
-      localStorage.setItem('notes', JSON.stringify(this.notes));
+      sessionStorage.setItem('notes', JSON.stringify(this.notes));
     }
     
   }
   
   updateNote(newValue: any){
-    localStorage.removeItem(JSON.stringify('notes'));
+    sessionStorage.removeItem(JSON.stringify('notes'));
     this.notes.forEach((note: any, index: number)=>{
       if(note.id== newValue.id) {
         this.notes[index].content = newValue.content;
@@ -71,8 +71,8 @@ export class AppComponent implements OnInit  {
      this.notes.forEach((note: any, index: number)=>{
       if(note.id== id) {
         this.notes.splice(index,1);
-        localStorage.removeItem(note.id);
-        localStorage.setItem('notes', JSON.stringify(this.notes));
+        sessionStorage.removeItem(note.id);
+        sessionStorage.setItem('notes', JSON.stringify(this.notes));
         return;
       }
     });
