@@ -9,9 +9,11 @@ import { Component, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 export class AppComponent {
   notes: any = [];
   recognition:any;
+
   constructor(private el:ElementRef) {
     this.notes = JSON.parse(<any>localStorage.getItem('notes')) || [{ id: 0,content:'' }];
   }
+
   updateAllNotes() {
     let notes = document.querySelectorAll('app-note');
 
@@ -23,14 +25,18 @@ export class AppComponent {
   }
 
   addNote () {
-    this.notes.push({ id: this.notes.length + 1, content:'' });
+    if(this.notes.length <= 4) {
+      this.notes.push({ id: this.notes.length + 1, content:'' });
     // sort the array
-    this.notes= this.notes.sort((a: any,b: any)=>{ return b.id - a.id});
+    this.notes= this.notes.sort((a: any,b: any)=>{ return a.id - b.id });
     localStorage.setItem('notes', JSON.stringify(this.notes));
+    }
+    
   };
   
   saveNote(event: any){
-    const id = event.srcElement.parentElement.parentElement.getAttribute('id');
+    const id = event.srcElement.parentElement.parentElement.parentElement.getAttribute('id');
+    console.log(event)
     const content = event.target.innerText;
     event.target.innerText = content;
     const json = {

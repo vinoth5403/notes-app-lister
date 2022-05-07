@@ -10,6 +10,7 @@ export class NoteComponent {
   
   @Output() dismiss = new EventEmitter();
   @Output() focusout = new EventEmitter();
+  
   constructor() { }
   
   onDismiss(event:any){

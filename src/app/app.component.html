@@ -1,12 +1,13 @@
-<div class="app">
-	<app-note *ngFor="let note of notes" (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}">{{note.content}}</app-note>
+<div class="container">
+ <div class="row">
+    <div class="col-md-3" *ngFor="let note of notes">
+      <app-note  (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}">{{note.content}}</app-note>
+    </div>
+ </div>
+	
 </div>
 <div  class="toolbar" id="toolbar" tabindex="0">
 	<button class="add material-icons" (click)="addNote()" >
   note_add
 	</button>
-  <!-- <button (click) = "updateAllNotes()">Click</button> -->
-  <!-- <button class="record material-icons" (click)="record($event)">
-    settings_voice
-  </button> -->
 </div>
