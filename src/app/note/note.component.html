@@ -1,0 +1,20 @@
+<div class="note">
+    <div class="note_toolbar">
+        <span class="close material-icons" (click)="onDismiss($event)">close</span>
+    </div>
+      <div class="content" contenteditable="true" (blur)="onFocusOut($event)">
+          <ng-content></ng-content>
+      </div>
+</div>
+
+
+<!-- <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <div class="content" contenteditable="true" (blur)="onFocusOut($event)">
+        <ng-content></ng-content>
+      </div>
+      <button type="button" class="btn btn-primary">Primary</button>
+    </div>
+  </div> -->
