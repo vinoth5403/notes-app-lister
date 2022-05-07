@@ -1,4 +1,4 @@
-import { Component, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ElementRef, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'my-app',
@@ -6,7 +6,8 @@ import { Component, ElementRef, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: [ './app.component.css' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit  {
   notes: any = [];
   recognition:any;
 
@@ -16,13 +17,17 @@ export class AppComponent {
 
   updateAllNotes() {
     let notes = document.querySelectorAll('app-note');
-
     notes.forEach((note: any, index: number)=>{
          this.notes[note.id].content = note.querySelector('.content')?.innerHTML;
     });
-
     localStorage.setItem('notes', JSON.stringify(this.notes));
   }
+
+  ngOnInit() {
+    if(this.notes.length === 0){
+      this.notes.push({ id: this.notes.length + 1, content:'' });
+    }
+ }
 
   addNote () {
     if(this.notes.length <= 4) {
@@ -44,10 +49,16 @@ export class AppComponent {
       'content':content
     }
     this.updateNote(json);
-    localStorage.setItem('notes', JSON.stringify(this.notes));
+    if(this.notes.length === 0){
+      localStorage.removeItem('notes');
+    }else{
+      localStorage.setItem('notes', JSON.stringify(this.notes));
+    }
+    
   }
   
   updateNote(newValue: any){
+    localStorage.removeItem(JSON.stringify('notes'));
     this.notes.forEach((note: any, index: number)=>{
       if(note.id== newValue.id) {
         this.notes[index].content = newValue.content;
@@ -60,6 +71,7 @@ export class AppComponent {
      this.notes.forEach((note: any, index: number)=>{
       if(note.id== id) {
         this.notes.splice(index,1);
+        localStorage.removeItem(note.id);
         localStorage.setItem('notes', JSON.stringify(this.notes));
         return;
       }

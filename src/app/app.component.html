@@ -1,13 +1,14 @@
-<div class="container">
- <div class="row">
-    <div class="col-md-3" *ngFor="let note of notes">
-      <app-note  (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}">{{note.content}}</app-note>
+<div class="container-fluid">
+    <h1 class="text-center mb-5">NoteBook APP</h1>
+    <div *ngIf="notes?.length > 0 ;else nobook">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let note of notes">
+          <app-note [pageNumber]="note.id + 1" (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}">{{note.content}}</app-note>
+        </div>
+      </div>
     </div>
- </div>
-	
+  <ng-template #nobook><h6 class="text-center p-3 mb-2 bg-info text-white">No Books page available. Please refersh or Add Notes button to get new Page</h6></ng-template>
 </div>
-<div  class="toolbar" id="toolbar" tabindex="0">
-	<button class="add material-icons" (click)="addNote()" >
-  note_add
-	</button>
+<div  class="toolbar">
+  <button type="button" class="p-3 mb-2 bg-success text-white" (click)="addNote()" style="width:100%;">Add Notes</button>
 </div>

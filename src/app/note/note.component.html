@@ -1,19 +1,9 @@
-<!-- <div class="note">
-    <div class="note_toolbar">
-        <span class="close material-icons" (click)="onDismiss($event)">close</span>
-    </div>
-      <div class="content" contenteditable="true" (blur)="onFocusOut($event)">
-          <ng-content></ng-content>
-      </div>
-</div> -->
-
-
 <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h5 class="card-title">Page</h5>
+      <button type="button" class="btn-close custom-close" aria-label="Close" (click)="onDismiss($event)"></button>
       <div class="content" contenteditable="true" (blur)="onFocusOut($event)">
         <ng-content></ng-content>
       </div>
-      <button type="button" class="btn btn-primary">Primary</button>
     </div>
-  </div>
+</div>

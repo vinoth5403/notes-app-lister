@@ -1,4 +1,4 @@
-import {Component, HostBinding, EventEmitter, Output } from '@angular/core'
+import {Component, EventEmitter, Input, Output } from '@angular/core'
 
 @Component({
   selector:'app-note',
@@ -7,10 +7,10 @@ import {Component, HostBinding, EventEmitter, Output } from '@angular/core'
 })
 
 export class NoteComponent {
-  
+  @Input() pageNumber: any;
   @Output() dismiss = new EventEmitter();
   @Output() focusout = new EventEmitter();
-  
+
   constructor() { }
   
   onDismiss(event:any){
