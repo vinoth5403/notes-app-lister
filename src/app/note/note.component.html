@@ -1,6 +1,6 @@
-<div class="card" style="width: 18rem;">
+<div class="card" style="width:100%;">
     <div class="card-body">
-      <h5 class="card-title">Page</h5>
+      <h5 class="card-title">Page {{pageNumber}}</h5>
       <button type="button" class="btn-close custom-close" aria-label="Close" (click)="onDismiss($event)"></button>
       <div class="content" contenteditable="true" (blur)="onFocusOut($event)">
         <ng-content></ng-content>

@@ -8,7 +8,7 @@
 .content {
     padding: 5px;
     outline: none;
-    height: 210px;
+    min-height: 50vh;
     border-radius: 8px;
     overflow-y: auto;
 }

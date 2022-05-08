@@ -1,14 +1,17 @@
 <div class="container-fluid">
-    <h1 class="text-center mb-5">NoteBook APP</h1>
+    <h1 class="text-center mb-5 mt-5">NoteBook APP</h1>
     <div *ngIf="notes?.length > 0 ;else nobook">
       <div class="row">
-        <div class="col-md-3" *ngFor="let note of notes">
-          <app-note [pageNumber]="note.id + 1" (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}">{{note.content}}</app-note>
+        <div class="col-md-12" *ngFor="let note of notes | paginate: { itemsPerPage: 1, currentPage: p }">
+          <app-note [pageNumber]="p" (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}">{{note.content}}</app-note>
         </div>
+      </div>
+      <div class="text-center">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   <ng-template #nobook><h6 class="text-center p-3 mb-2 bg-info text-white">No Books page available. Please refersh or Add Notes button to get new Page</h6></ng-template>
 </div>
 <div  class="toolbar">
-  <button type="button" class="p-3 mb-2 bg-success text-white" (click)="addNote()" style="width:100%;">Add Notes</button>
+  <button type="button" class="btn btn-primary btn-lg" (click)="addNote()" style="width:40%;">Add Notes</button>
 </div>

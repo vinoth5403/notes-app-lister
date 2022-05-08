@@ -9,6 +9,7 @@ import { Component, ElementRef, ChangeDetectionStrategy, OnInit } from '@angular
 
 export class AppComponent implements OnInit  {
   notes: any = [];
+  p: number = 1;
   recognition:any;
 
   constructor(private el:ElementRef) {
@@ -67,6 +68,7 @@ export class AppComponent implements OnInit  {
   }
   
   deleteNote(event: any){
+    this.p--;
      const id = event.srcElement.parentElement.parentElement.parentElement.getAttribute('id');
      this.notes.forEach((note: any, index: number)=>{
       if(note.id== id) {
